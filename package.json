@@ -1,0 +1,15 @@
+{
+  "name": "reportbot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:jellz/reportbot.git",
+  "author": "Daniel G <xdjellz@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.2.3",
+    "discord.js": "hydrabolt/discord.js",
+    "fs-readdir-recursive": "^1.1.0",
+    "node-fetch": "^2.2.0",
+    "rethinkdbdash": "^2.3.31"
+  }
+}
