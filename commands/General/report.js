@@ -18,22 +18,27 @@ const run = module.exports.run = async (msg, args) => {
     
     msg.delete({ reason: 'valid report command usage' });
 
-    const id = (await r.table('reports').count().run()) + (await r.table('appeals').count().run()) + 1;
-    await r.table('reports').insert({
+    const id = (await r.table('cases').count()) + 1;
+    await r.table('cases').insert({
         id,
-        offender: json.name,
-        reporter: {
+        type: 'REPORT',
+        at: Date.now(),
+        subject: json.name,
+        reason: args.slice(1).join(' '),
+        message: null,
+        submittedBy: {
             id: msg.author.id,
             tag: msg.author.tag
         },
-        offence: args.slice(1).join(' '),
-        submittedAt: Date.now(),
-        closedAt: null,
-        closedBy: {
-            id: null,
-            tag: null
-        },
-        messageId: null
+        closed: {
+            closed: false,
+            at: null,
+            by: {
+                id: null,
+                tag: null
+            },
+            reason: null
+        }
     }).run();
 
     const channel = client.channels.get(client.config.channels.report);
@@ -49,7 +54,7 @@ const run = module.exports.run = async (msg, args) => {
 
     const reportMessage = await channel.send(embed);
 
-    await r.table('reports').get(id).update({ messageId: reportMessage.id });
+    await r.table('cases').get(id).update({ message: reportMessage.id });
 
     const m = await msg.channel.send(client.config.emoji.success);
     return m.delete({ timeout: 5000 });
