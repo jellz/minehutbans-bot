@@ -5,6 +5,12 @@ const run = module.exports.run = async (msg, args) => {
     if (args.length < 2 || args[0].length > 16) {
         msg.delete({ reason: 'invalid report command usage' });
         const m = await client.invalidCommandUsage(msg, meta);
+        return m.delete({ timeout: 8000 });
+    }
+
+    if (args.slice(1).join(' ').length > 1000) {
+        msg.delete({ reason: 'invalid report command usage' });
+        const m = await msg.channel.send(client.config.emoji.fail + ' Your report is too long.');
         return m.delete({ timeout: 5000 });
     }
 
