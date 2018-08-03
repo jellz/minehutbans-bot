@@ -10,7 +10,7 @@ const run = module.exports.run = async (msg, args) => {
     $case.closed.by = { id: msg.author.id, tag: msg.author.tag };
     $case.closed.reason = closeReason;
     await r.table('cases').get(parseInt(args[0], 10)).update($case).run();
-    const message = $case.type == 'REPORT' ? client.channels.get(client.config.channels.report).messages.get($case.message) : client.channels.get(client.config.channels.appeal).messages.get($case.message);
+    const message = client.channels.get(client.config.channels.report).messages.get($case.message);
     const embed = message.embeds[0];
     if ($case.type == 'REPORT') {
         embed.setDescription(`A report was filed for **${$case.subject}** by **${$case.submittedBy.tag}**.\nThis report was marked as resolved by ${msg.author.tag} at ${Date()}.`);
