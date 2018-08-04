@@ -3,6 +3,12 @@ module.exports = {
     prefix: '!', // prefix for commands, e.g. !report, +report, >report
     ownerId: '', // OPTIONAL: this user id can use owner commands like eval and reload
     activity: 'with potential cheaters.', // OPTIONAL: this is the bot's "game"
+    
+    /* every x milliseconds, reportbot will remind the Staff role
+       of unresolved reports; default interval is 12 hours, set interval to -1 to disable */
+    reminder: {
+        interval: 4.32e+7
+    }
 
     channels: {
         report: '' // what channel should we send reports to?
@@ -16,4 +22,5 @@ module.exports = {
     roles: {
         staff: '' // what role can use the close command? must be a role ID!
     }
+
 }
