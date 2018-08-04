@@ -1,6 +1,6 @@
 const { Client, MessageEmbed } = require('discord.js');
 const client = new Client({ disableEveryone: true });
-const config = require('./config.js');
+const config = require('../config.js');
 client.login(config.token);
 
 const r = require('rethinkdbdash')({ db: 'reportbot' });

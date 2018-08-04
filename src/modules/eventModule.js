@@ -1,5 +1,5 @@
 const run = module.exports = async () => {
-    require('fs').readdir('events', (err, files) => {
+    require('fs').readdir('src/events', (err, files) => {
         if (err) return console.error(err);
         files.forEach(file => {
             const eventFunction = require('../events/' + file);

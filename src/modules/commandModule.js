@@ -5,7 +5,7 @@ const run = module.exports = async (msg) => {
     const args = msg.content.trim().slice(client.config.prefix.length).split(' ');
     const reqCmd = args.shift().toLowerCase();
     try {
-        const files = read('commands');
+        const files = read('src/commands');
         files.forEach(file => {
             if (!file.includes('category.json')) {
                 const meta = require('../commands/' + file).meta;
