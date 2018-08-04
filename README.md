@@ -16,7 +16,7 @@ The only commands you need to know are **!report** and **!close**; reportbot wil
 
 ## Prerequisites
 
-- A server to host the bot (Tested with Ubuntu 16.04)
+- A 24/7 server to host the bot (this bot is designed to run constantly)
 - A Discord server + bot user
 - RethinkDB running locally, on default host settings
 - Node.js 8.9.4 or higher
