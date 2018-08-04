@@ -12,6 +12,8 @@ There are multiple ways to use reportbot.
 - If you have a separate Discord server for your Staff, you could add the bot there and your main server - then set the report channel config option to a channel in your Staff server.
 - If you only use one Discord server for all your operations, reportbot supports that too. Just set the report channel to a channel in your main server.
 
+The only commands you need to know are **!report** and **!close**; reportbot will tell you the correct usage in Discord.
+
 ## Prerequisites
 
 - A server to host the bot (Tested with Ubuntu 16.04)
