@@ -23,7 +23,7 @@ There are multiple ways to use reportbot.
 
 - Clone the repository.
 - Install dependencies (`npm install` or `yarn`).
-- Create a Rethink database called **`reportbot`**.
+- Create a Rethink database called **`reportbot`**, and make a table called `cases`.
 - Rename `config.js.example` to `config.js`, and populate the required fields.
 - Start the bot (`node .` or with PM2 `pm2 start index.js --name="reportbot"`).
 
