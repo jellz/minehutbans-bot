@@ -21,6 +21,7 @@ client.invalidCommandUsage = async (msg, meta) => {
     '```'
   ].join('\n')).setColor('RED'));
   m.delete({ timeout: 10000 });
+  msg.delete({ timeout: 10000 });
 }
 
 global.client = client;

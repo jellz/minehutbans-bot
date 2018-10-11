@@ -13,9 +13,11 @@ const run = module.exports.run = async (msg, args) => {
   if (!json.ok) {
     let m = await msg.channel.send(`**ERROR**: \`${json.errors[0]}\``);
     m.delete({ timeout: 10000 });
+    msg.delete();
   } else {
     let m = await msg.channel.send(':ok_hand:');
     m.delete({ timeout: 10000 });
+    msg.delete();
   }
 }
 

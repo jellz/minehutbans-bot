@@ -7,6 +7,7 @@ const run = module.exports.run = async (msg, args) => {
   let uuid = await mcapi.usernameToUUID(args[0]);
   let m = await msg.channel.send(uuid == 'fail' ? 'Invalid username' : uuid);
   m.delete({ timeout: 15000 });
+  msg.delete({ timeout: 15000 });
 }
 
 const meta = module.exports.meta = {

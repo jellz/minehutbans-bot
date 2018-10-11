@@ -9,6 +9,7 @@ const run = module.exports.run = async (msg, args) => {
   if (!json.ok) {
     let m = await msg.channel.send(`**ERROR**: \`${json.errors[0]}\``);
     m.delete({ timeout: 10000 });
+    msg.delete();
   } else {
     let embed = new MessageEmbed()
       .setTitle(json.player.username)
@@ -20,6 +21,7 @@ const run = module.exports.run = async (msg, args) => {
       .addField('When?', new Date(json.player.createdAt).toUTCString());
     let m = await msg.channel.send(embed);
     m.delete({ timeout: 15000 });
+    msg.delete();
   }
 }
 
