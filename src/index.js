@@ -14,12 +14,13 @@ client.config = config;
  * @param {Object} meta The command meta
  */
 client.invalidCommandUsage = async (msg, meta) => {
-  return msg.channel.send(new MessageEmbed().setDescription([
+  let m = await msg.channel.send(new MessageEmbed().setDescription([
     '**Invalid usage!** Try this instead...',
     '```',
     `${client.config.prefix}${meta.aliases[0]} ${meta.usage}`,
     '```'
   ].join('\n')).setColor('RED'));
+  m.delete({ timeout: 10000 });
 }
 
 global.client = client;
