@@ -17,7 +17,7 @@ const run = module.exports.run = async (msg, args) => {
   } else {
     let m = await msg.channel.send(':ok_hand:');
     await client.channels.get('499912390125682691').send(
-      `**${msg.author.tag}** blacklisted **\`${args[0]}\`** for \`${args.slice(1).join(' ')}\``
+      `**${msg.author.tag}** un-blacklisted **\`${args[0]}\`** for \`${args.slice(1).join(' ')}\``
     );
     m.delete({ timeout: 10000 });
     msg.delete();
