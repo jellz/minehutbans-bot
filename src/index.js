@@ -3,7 +3,7 @@ const client = new Client({ disableEveryone: true });
 const config = require('../config.js');
 client.login(config.token);
 
-const r = require('rethinkdbdash')({ db: 'reportbot' });
+const r = require('rethinkdbdash')({ db: 'minehutbans' });
 
 require('./modules/eventModule.js')();
 client.config = config;
@@ -14,12 +14,12 @@ client.config = config;
  * @param {Object} meta The command meta
  */
 client.invalidCommandUsage = async (msg, meta) => {
-    return msg.channel.send(new MessageEmbed().setDescription([
-        '**Invalid usage!** Try this instead...',
-        '```',
-        `${client.config.prefix}${meta.aliases[0]} ${meta.usage}`,
-        '```'
-    ].join('\n')).setColor('RED'));
+  return msg.channel.send(new MessageEmbed().setDescription([
+    '**Invalid usage!** Try this instead...',
+    '```',
+    `${client.config.prefix}${meta.aliases[0]} ${meta.usage}`,
+    '```'
+  ].join('\n')).setColor('RED'));
 }
 
 global.client = client;
