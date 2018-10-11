@@ -8,7 +8,7 @@ module.exports = {
        of unresolved reports; default interval is 12 hours, set interval to -1 to disable */
     reminder: {
         interval: 4.32e+7
-    }
+    },
 
     channels: {
         report: '' // what channel should we send reports to?
