@@ -11,9 +11,11 @@ const run = module.exports.run = async (msg, args) => {
   });
   let json = await res.json();
   if (!json.ok) {
-    msg.channel.send(`**ERROR**: \`${json.errors[0]}\``);
+    let m = await msg.channel.send(`**ERROR**: \`${json.errors[0]}\``);
+    m.delete({ timeout: 10000 });
   } else {
-    msg.channel.send(':ok_hand:');
+    let m = await msg.channel.send(':ok_hand:');
+    m.delete({ timeout: 10000 });
   }
 }
 
