@@ -1,2 +1,2 @@
 # bot
-MinehutBans' Discord bot - forked from danielgulic/reportbot
+MinehutBans' Discord bot - forked from jellz/reportbot
