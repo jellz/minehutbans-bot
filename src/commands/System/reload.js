@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 
-const run = module.exports.run = async (msg, args) => {
+exports.run = async (msg, args) => {
   if (!args[0]) return client.invalidCommandUsage(msg, meta);
   delete require.cache[require.resolve(`../${args[0]}.js`)];
   msg.channel.send({ embed: new MessageEmbed()
@@ -9,7 +9,7 @@ const run = module.exports.run = async (msg, args) => {
   });
 }
 
-const meta = module.exports.meta = {
+exports.meta = {
   aliases: ['reload', 'rl'],
   ownerOnly: true,
   description: 'Reload commands.',

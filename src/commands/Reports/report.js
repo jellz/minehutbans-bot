@@ -1,7 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const fetch = require('node-fetch');
 
-const run = module.exports.run = async (msg, args) => {
+exports.run = async (msg, args) => {
   if (args.length < 2 || args[0].length > 16) {
     msg.delete({ reason: 'invalid report command usage' });
     let m = await client.invalidCommandUsage(msg, meta);
@@ -65,7 +65,7 @@ const run = module.exports.run = async (msg, args) => {
   return m.delete({ timeout: 5000 });
 }
 
-const meta = module.exports.meta = {
+exports.meta = {
   aliases: ['report'],
   ownerOnly: false,
   description: 'Report a player',

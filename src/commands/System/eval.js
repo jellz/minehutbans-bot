@@ -6,20 +6,20 @@ const clean = (text) => {
   }
 }
 
-const run = module.exports.run = async (msg, args) => {
+exports.run = async (msg, args) => {
   try {
     let code = args.join(' ');
     let evaled = eval(code);
     if (typeof evaled !== 'string') {
         evaled = require('util').inspect(evaled);
     }
-    msg.channel.send(clean(evaled), {code:'xl'});
+    msg.channel.send(clean(evaled), { code: 'xl' });
   } catch (err) {
     msg.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
   }
 }
 
-const meta = module.exports.meta = {
+exports.meta = {
   aliases: ['eval', 'ev'],
   ownerOnly: true,
   description: 'Evaluate raw JavaScript.',

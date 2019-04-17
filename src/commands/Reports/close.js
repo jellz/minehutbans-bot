@@ -1,4 +1,4 @@
-const run = module.exports.run = async (msg, args) => {
+exports.run = async (msg, args) => {
   if (!msg.member.roles.some(r => r.id == client.config.roles.staff)) return;
   if (args.length < 2) return await client.invalidCommandUsage(msg, meta);
   let $case = await r.table('cases').get(parseInt(args[0], 10)).run();
@@ -13,19 +13,19 @@ const run = module.exports.run = async (msg, args) => {
   let message = client.channels.get(client.config.channels.report).messages.get($case.message);
   let embed = message.embeds[0];
   if ($case.type == 'REPORT') {
-    embed.setDescription(`A report was filed for **${$case.subject}** by **${$case.submittedBy.tag}**.\nThis report was marked as resolved by ${msg.author.tag} at ${Date()}.`);
+    embed.setDescription(`A report was filed for **${$case.subject}** by **${$case.submittedBy.tag}**.\nThis report was closed by ${msg.author.tag} at ${new Date().toUTCString()}.`);
     embed.setColor('0xffffff');
     embed.addField('Resolve reason', closeReason, true);
-    message.edit({ embed: embed });
+    message.edit({ embed });
     msg.channel.send(client.config.emoji.success);
   }
   let submittedBy = client.users.get($case.submittedBy.id);
   try {
-    submittedBy.send(`${client.config.emoji.success} Your case, **#${$case.id}** (${$case.type}: ${$case.subject}), was marked as resolved by ${msg.author.tag}, with reason \`${closeReason}\`.`);
+    submittedBy.send(`${client.config.emoji.success} Your case, **#${$case.id}** (${$case.type}: ${$case.subject}), was closed by ${msg.author.tag}, with reason \`${closeReason}\`.`);
   } catch (err) { }
 }
 
-const meta = module.exports.meta = {
+exports.meta = {
   aliases: ['close', 'resolve'],
   ownerOnly: false,
   description: 'Close a case',
