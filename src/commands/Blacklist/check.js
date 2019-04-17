@@ -7,7 +7,7 @@ exports.run = async (msg, args) => {
   let res = await fetch('https://api.minehutbans.xyz/api/blacklisted_players/' + await mcapi.usernameToUUID(args[0]));
   let json = await res.json();
   if (!json.ok) {
-    let m = await msg.channel.send(`**ERROR**: \`${json.errors[0]}\``);
+    let m = await msg.channel.send(`**ERROR**: \`${json.error}\``);
     m.delete({ timeout: 10000 });
     msg.delete();
   } else {

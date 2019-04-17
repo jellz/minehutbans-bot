@@ -15,7 +15,7 @@ exports.run = async (msg, args) => {
   });
   let json = await res.json();
   if (!json.ok) {
-    let m = await msg.channel.send(`**ERROR**: \`${json.errors[0]}\``);
+    let m = await msg.channel.send(`**ERROR**: \`${json.error}\``);
   } else {
     let m = await msg.channel.send(':ok_hand:');
     await client.channels.get('499912390125682691').send(
