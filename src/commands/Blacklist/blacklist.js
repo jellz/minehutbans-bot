@@ -6,11 +6,11 @@ const run = module.exports.run = async (msg, args) => {
   let res = await fetch('https://api.minehutbans.xyz/api/blacklisted_players?access=' + client.config.accessToken, {
     method: 'POST',
     headers: {
-        'Content-Type': 'application/json'
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-        username: args[0],
-        reason: args.slice(1).join(' ')
+      username: args[0],
+      reason: args.slice(1).join(' ')
     })
   });
   let json = await res.json();
