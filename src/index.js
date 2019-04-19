@@ -1,12 +1,12 @@
+require('dotenv').config();
+
 const { Client, MessageEmbed } = require('discord.js');
 const client = new Client({ disableEveryone: true });
-const config = require('../config.js');
-client.login(config.token);
+client.login(process.env.DISCORD_TOKEN);
 
-const r = require('rethinkdbdash')({ db: 'minehutbans' });
+const r = require('rethinkdbdash')({ db: process.env.DATABASE_NAME });
 
 require('./modules/eventModule.js')();
-client.config = config;
 
 /**
  * 
@@ -17,11 +17,10 @@ client.invalidCommandUsage = async (msg, meta) => {
   let m = await msg.channel.send(new MessageEmbed().setDescription([
     '**Invalid usage!** Try this instead...',
     '```',
-    `${client.config.prefix}${meta.aliases[0]} ${meta.usage}`,
+    `${process.env.DISCORD_PREFIX}${meta.aliases[0]} ${meta.usage}`,
     '```'
   ].join('\n')).setColor('RED'));
-  m.delete({ timeout: 10000 });
-  msg.delete({ timeout: 10000 });
+  return m;
 }
 
 global.client = client;

@@ -1,9 +1,9 @@
 const fetch = require('node-fetch');
 
 exports.run = async (msg, args) => {
-  if (!msg.member.roles.some(r => r.id == client.config.roles.staff)) return;
-  if (!args[0] || !args[1] || args[0].length > 16) return await client.invalidCommandUsage(msg, meta);
-  let res = await fetch('https://api.minehutbans.xyz/api/blacklisted_players?access=' + client.config.accessToken, {
+  if (!msg.member.roles.some(r => r.id == process.env.DISCORD_ROLE_STAFF)) return;
+  if (!args[0] || !args[1] || args[0].length > 16) return await client.invalidCommandUsage(msg, exports.meta);
+  let res = await fetch(`${process.env.API_BASE}/api/blacklisted_players?access=` + process.env.ACCESS_TOKEN, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -18,7 +18,7 @@ exports.run = async (msg, args) => {
     let m = await msg.channel.send(`**ERROR**: \`${json.error}\``);
   } else {
     let m = await msg.channel.send(':ok_hand:');
-    await client.channels.get('499912390125682691').send(
+    await client.channels.get(process.env.DISCORD_CHANNEL_LOG).send(
       `**${msg.author.tag}** blacklisted **\`${args[0]}\`** for \`${args.slice(1).join(' ')}\``
     );
   }
@@ -28,5 +28,5 @@ exports.meta = {
   aliases: ['blacklist', 'bl', 'add'],
   ownerOnly: false,
   description: 'Blacklist a player',
-  usage: '<player> <reason + evidence>'
+  usage: '<player\'s IGN> <reason + evidence>'
 }

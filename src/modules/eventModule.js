@@ -1,4 +1,4 @@
-const run = module.exports = async () => {
+module.exports = async () => {
   require('fs').readdir('src/events', (err, files) => {
     if (err) return console.error(err);
     files.forEach(file => {

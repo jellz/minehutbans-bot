@@ -1,7 +1,5 @@
 exports.run = async (msg, args) => {
-  let m = await msg.channel.send('See "How do I use the bot?" in <#499606237521117184>');
-  m.delete({ timeout: 5000 });
-  msg.delete();
+  let m = await msg.channel.send('See "How do I use the bot?" in <#568784397592035348>');
 }
 
 exports.meta = {

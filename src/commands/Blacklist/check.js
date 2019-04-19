@@ -3,8 +3,8 @@ const fetch = require('node-fetch');
 const mcapi = require('mcapi');
 
 exports.run = async (msg, args) => {
-  if (!args[0] || args[0].length > 16) return await client.invalidCommandUsage(msg, meta);
-  let res = await fetch('https://api.minehutbans.xyz/api/blacklisted_players/' + await mcapi.usernameToUUID(args[0]));
+  if (!args[0] || args[0].length > 16) return await client.invalidCommandUsage(msg, exports.meta);
+  let res = await fetch(`${process.env.API_BASE}/api/blacklisted_players/` + await mcapi.usernameToUUID(args[0]));
   let json = await res.json();
   if (!json.ok) {
     let m = await msg.channel.send(`**ERROR**: \`${json.error}\``);
@@ -27,5 +27,5 @@ exports.meta = {
   aliases: ['check', 'lookup', 'lu'],
   ownerOnly: false,
   description: 'Check if a player is blacklisted',
-  usage: '<player>'
+  usage: '<player\'s IGN>'
 }
