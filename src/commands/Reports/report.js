@@ -23,6 +23,13 @@ exports.run = async (msg, args) => {
   let json = await uuidRes.json();
   msg.delete({ reason: 'valid report command usage' });
 
+  let blacklistedPlayer = await r.table('blacklisted_players').get(uuidRes.id);
+  if (blacklistedPlayer) {
+    msg.delete({ reason: 'report: player already blacklisted' });
+    let m = await msg.channel.send(process.env.DISCORD_EMOJI_FAIL + ' This player is already blacklisted.');
+    return m.delete({ timeout: 5000 });
+  }
+
   let id = (await r.table('cases').count()) + 1;
   await r.table('cases').insert({
     id,
