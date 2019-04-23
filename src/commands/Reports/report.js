@@ -29,6 +29,12 @@ exports.run = async (msg, args) => {
     return m.delete({ timeout: 5000 });
   }
 
+  let unresolvedCasesOnPlayer = await r.table('cases').filter({ subject: { id: json.id }, closed: { closed: false } }).run();
+  if (unresolvedCasesOnPlayer.length >= 2) {
+    let m = await msg.channel.send(process.env.DISCORD_EMOJI_FAIL + ' There are already pending reports on this player.');
+    return m.delete({ timeout: 5000 });
+  }
+
   let id = (await r.table('cases').count()) + 1;
   await r.table('cases').insert({
     id,
