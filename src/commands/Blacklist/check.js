@@ -4,8 +4,16 @@ const mcapi = require('mcapi');
 
 exports.run = async (msg, args) => {
   if (!args[0] || args[0].length > 16) return await client.invalidCommandUsage(msg, exports.meta);
-  let res = await fetch(`${process.env.API_BASE}/api/blacklisted_players/` + await mcapi.usernameToUUID(args[0]));
+
+  let uuidRes = await fetch('https://api.mojang.com/users/profiles/minecraft/' + args[0]);
+  if (uuidRes.status == 204) { // not a real player
+    let m = await msg.channel.send(process.env.DISCORD_EMOJI_FAIL + ' The player you have specified is not real.');
+  }
+  let uuidResJson = await uuidRes.json();
+
+  let res = await fetch(`${process.env.API_BASE}/api/blacklisted_players/` + uuidResJson.id);
   let json = await res.json();
+
   if (!json.ok) {
     let m = await msg.channel.send(`**ERROR**: \`${json.error}\``);
     m.delete({ timeout: 10000 });
