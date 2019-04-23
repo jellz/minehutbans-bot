@@ -25,7 +25,6 @@ exports.run = async (msg, args) => {
 
   let blacklistedPlayer = await r.table('blacklisted_players').get(json.id);
   if (blacklistedPlayer) {
-    msg.delete({ reason: 'report: player already blacklisted' });
     let m = await msg.channel.send(process.env.DISCORD_EMOJI_FAIL + ' This player is already blacklisted.');
     return m.delete({ timeout: 5000 });
   }
