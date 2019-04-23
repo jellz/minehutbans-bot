@@ -28,7 +28,10 @@ exports.run = async (msg, args) => {
     id,
     type: 'REPORT',
     at: Date.now(),
-    subject: json.name,
+    subject: {
+      name: json.name,
+      id: json.id
+    },
     reason: args.slice(1).join(' '),
     message: null,
     submittedBy: {
@@ -39,8 +42,8 @@ exports.run = async (msg, args) => {
       closed: false,
       at: null,
       by: {
-          id: null,
-          tag: null
+        id: null,
+        tag: null
       },
       reason: null
     }
