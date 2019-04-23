@@ -11,18 +11,11 @@ exports.run = async (msg, args) => {
   $case.closed.reason = closeReason;
   await r.table('cases').get(parseInt(args[0], 10)).update($case).run();
   let message = client.channels.get(process.env.DISCORD_CHANNEL_REPORTS).messages.get($case.message);
-  let embed = message.embeds[0];
-  if ($case.type == 'REPORT') {
-    embed.setDescription(`A report was filed for **${$case.subject}** by **${$case.submittedBy.tag}**.\nThis report was closed by ${msg.author.tag} at ${new Date().toUTCString()}.`);
-    embed.setColor('0xffffff');
-    embed.addField('Resolve reason', closeReason, true);
-    message.edit({ embed });
-    msg.channel.send(process.env.DISCORD_EMOJI_SUCCESS);
-  }
+  message.delete('Case closed');
   let submittedBy = client.users.get($case.submittedBy.id);
   try {
     submittedBy.send(`${process.env.DISCORD_EMOJI_SUCCESS} Your case, **#${$case.id}** (${$case.type}: ${$case.subject}), was closed by ${msg.author.tag}, with reason \`${closeReason}\`.`);
-  } catch (err) { }
+  } catch (err) { throw err; }
 }
 
 exports.meta = {
