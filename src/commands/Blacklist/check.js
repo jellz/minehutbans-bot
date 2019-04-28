@@ -17,16 +17,26 @@ exports.run = async (msg, args) => {
   if (!json.ok) {
     let m = await msg.channel.send(`**ERROR**: \`${json.error}\``);
     m.delete({ timeout: 10000 });
-    msg.delete();
-  } else {
+    return msg.delete();
+  }
+
+  if (json.blacklisted) {
     let embed = new MessageEmbed()
       .setTitle(json.player.username)
       .setThumbnail(`https://visage.surgeplay.com/full/${json.player.id}?tilt=0`)
       .setColor('RED')
       .addField('UUID', json.player.id, true)
-      .addField('Blacklisted?', json.blacklisted ? 'Yes' : 'No', true)
+      .addField('Blacklisted?', 'Yes', true)
       .addField('Reason', json.player.reason, true)
       .addField('When?', new Date(json.player.createdAt).toUTCString());
+    let m = await msg.channel.send(embed);
+  } else {
+    let embed = new MessageEmbed()
+      .setTitle(uuidResJson.name)
+      .setThumbnail(`https://visage.surgeplay.com/full/${json.player.id}?tilt=0`)
+      .setColor('GREEN')
+      .addField('UUID', uuidResJson.id, true)
+      .addField('Blacklisted?', 'No', true)
     let m = await msg.channel.send(embed);
   }
 }
