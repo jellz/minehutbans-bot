@@ -36,7 +36,7 @@ exports.run = async (msg, args) => {
       .setThumbnail(`https://visage.surgeplay.com/full/${uuidResJson.id}?tilt=0`)
       .setColor('GREEN')
       .addField('UUID', uuidResJson.id, true)
-      .addField('Blacklisted?', 'No', true)
+      .addField('Blacklisted?', 'No', false)
     let m = await msg.channel.send(embed);
   }
 }
