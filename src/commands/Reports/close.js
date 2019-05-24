@@ -16,6 +16,7 @@ exports.run = async (msg, args) => {
   try {
     submittedBy.send(`${process.env.DISCORD_EMOJI_SUCCESS} Your case, **#${$case.id}** (${$case.type}: ${$case.subject}), was closed by ${msg.author.tag}, with reason \`${closeReason}\`.`);
   } catch (err) { throw err; }
+  await msg.channel.send(`:ok_hand: closed **#${case.id}**`);
 }
 
 exports.meta = {
